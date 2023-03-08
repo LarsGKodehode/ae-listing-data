@@ -518,6 +518,12 @@ export const postApi = new MockApi({
   ]
 });
 
+
+
+
+
+
+
 // Utilities
 function parseQuery(queryString) {
   const queries = {}
@@ -540,5 +546,5 @@ const tests = [
 ]
 
 Promise.allSettled(tests.map(testCase => postApi.request(testCase)))
-  .then(value => value.map((resolution) => console.log(resolution)))
+  .then(value => value.map(resolution => console.log(resolution)))
   .catch(error => console.warn(error))
