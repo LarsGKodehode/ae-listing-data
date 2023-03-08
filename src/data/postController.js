@@ -1,5 +1,8 @@
 import { posts } from "./data";
 
+/**
+ * Generate a number between min and max
+ */
 function getRandomNumber(min, max) {
   return ((Math.random() * (max - min)) + min)
 }
@@ -11,10 +14,11 @@ function request(callback) {
   return new Promise((resolve, reject) => {
     setTimeout(
       () => {
-        if (Math.random() > .5) {
+        // Mimic failure chance
+        if (Math.random() > 0.1) {
           resolve(callback())
         } else {
-          reject({ statusCode: 404 })
+          reject({ statusCode: 500 })
         }
       },
       getRandomNumber(500, 5000)
@@ -32,19 +36,19 @@ export function getPosts() {
 }
 
 /**
- * Returns a post with ID
+ * Returns the post with ID or 404 if no post found
 */
 export function getPost(id) {
   return request(
-    () => resolve(posts.find((post) => post.id === id))
+    () => resolve(posts.find((post) => post.id === id) || { statusCode: 404 })
   )
 }
 
 /**
- * Returns all post by userID
+ * Returns all post by userID, or 404 if no user or no post by user
 */
 export function getPostByUser(userId) {
   return request(
-    () => resolve(posts.filter((post) => post.userId === userId))
+    () => resolve(posts.filter((post) => post.userId === userId) || { statusCode: 404 })
   )
 }
