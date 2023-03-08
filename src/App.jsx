@@ -4,20 +4,25 @@ import * as postAPI from './data/postController'
 import { posts } from './data/data'
 
 function Post({
-  userId,
-  id,
   title,
-  body,
+  description,
+  author,
+  createdAt,
+  updatedAt,
   className
 }) {
+  const lastEdit = Date.parse(updatedAt ? updatedAt : createdAt)
+  const freshness = new Date(lastEdit).toLocaleDateString()
+
   return (
     <div className={className}>
       <div>
-        <h4>{title}</h4>
-        <p>{body}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
       <div>
-        <h6>User: {userId} <span>Post: {id}</span></h6>
+        <h4>{author.username}</h4>
+        <h4>{freshness}</h4>
       </div>
     </div>
   )
