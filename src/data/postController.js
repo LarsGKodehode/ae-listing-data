@@ -8,7 +8,7 @@ function getRandomNumber(min, max) {
 }
 
 /**
- * Wrapper for mimicing a fetch request to a remote API
+ * Wrapper for mimicking a fetch request to a remote API
  */
 function request(callback) {
   return new Promise((resolve, reject) => {
