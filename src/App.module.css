@@ -7,3 +7,19 @@
   background-color: var(--color-primary-500);
   color: var(--color-contrast-500);
 }
+
+.post {
+  display: flex;
+  max-width: 30rem;
+
+  background-color: var(--color-secondary-500);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+
+.post>* {
+  margin: .4rem;
+  padding: .2rem;
+  border-left: solid black 1px;
+}
