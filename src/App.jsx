@@ -12,7 +12,7 @@ function getDate(dateString) {
 }
 
 /**
- * Locale aware word capitalisation
+ * Locale aware word capitalization
  */
 function capitalize(string) {
   return string.slice(0, 1).toLocaleUpperCase() + string.slice(1)
@@ -36,6 +36,7 @@ function Post({
     <div className={className}>
       <div>
         <h3>{capitalTitle}</h3>
+        <hr />
         <br />
         <p>{description}</p>
       </div>
@@ -48,6 +49,9 @@ function Post({
   )
 }
 
+/**
+ * Main Application component
+ */
 function App() {
   return (
     <div className={`${style.App} standard`}>
