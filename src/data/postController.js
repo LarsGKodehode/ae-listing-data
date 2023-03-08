@@ -4,6 +4,9 @@ function getRandomNumber(min, max) {
   return ((Math.random() * (max - min)) + min)
 }
 
+/**
+ * Wrapper for mimicing a fetch to a remote API
+ */
 function request(callback) {
   return new Promise((resolve, reject) => {
     setTimeout(
