@@ -8,7 +8,7 @@ function getRandomNumber(min, max) {
 }
 
 /**
- * Wrapper for mimicing a fetch to a remote API
+ * Wrapper for mimicing a fetch request to a remote API
  */
 function request(callback) {
   return new Promise((resolve, reject) => {
@@ -36,19 +36,19 @@ export function getPosts() {
 }
 
 /**
- * Returns the post with ID or 404 if no post found
+ * Returns the posts with title matching the filter , or 404 if no posts found
 */
-export function getPost(id) {
+export function filterByTitle(filter) {
   return request(
-    () => resolve(posts.find((post) => post.id === id) || { statusCode: 404 })
+    () => resolve(posts.find((post) => post.title.includes(filter)) || { statusCode: 404 })
   )
 }
 
 /**
- * Returns all post by userID, or 404 if no user or no post by user
+ * Returns posts with author mathcing the filter, or 404 if no posts found
 */
-export function getPostByUser(userId) {
+export function filterPostsByAuthor(authorName) {
   return request(
-    () => resolve(posts.filter((post) => post.userId === userId) || { statusCode: 404 })
+    () => resolve(posts.filter((post) => post.author.username.includes(authorName)) || { statusCode: 404 })
   )
 }
