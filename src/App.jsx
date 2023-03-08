@@ -3,6 +3,24 @@ import style from './App.module.css'
 import * as postAPI from './data/postController'
 import { posts } from './data/data'
 
+/**
+ * Returns a standarized date format
+ */
+function getDate(dateString) {
+  const unixTime = Date.parse(dateString)
+  return new Date(unixTime).toLocaleDateString()
+}
+
+/**
+ * Locale aware word capitalisation
+ */
+function capitalize(string) {
+  return string.slice(0, 1).toLocaleUpperCase() + string.slice(1)
+}
+
+/**
+ * Component for displaying post data
+ */
 function Post({
   title,
   description,
@@ -11,18 +29,20 @@ function Post({
   updatedAt,
   className
 }) {
-  const lastEdit = Date.parse(updatedAt ? updatedAt : createdAt)
-  const freshness = new Date(lastEdit).toLocaleDateString()
+  const freshness = getDate(updatedAt ? updatedAt : createdAt)
+  const capitalTitle = capitalize(title)
 
   return (
     <div className={className}>
       <div>
-        <h3>{title}</h3>
+        <h3>{capitalTitle}</h3>
+        <br />
         <p>{description}</p>
       </div>
       <div>
-        <h4>{author.username}</h4>
-        <h4>{freshness}</h4>
+        <h6>Author: {author.username}</h6>
+        <br />
+        <h6>Last edited: {freshness}</h6>
       </div>
     </div>
   )
@@ -32,7 +52,7 @@ function App() {
   return (
     <div className={`${style.App} standard`}>
       {
-        posts.slice(0, 5).map((post) => <Post className={style.post} {...post} />)
+        posts.map((post) => <Post className={style.post} key={post.slug} {...post} />)
       }
     </div>
   )
